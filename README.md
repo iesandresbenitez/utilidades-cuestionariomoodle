@@ -34,3 +34,6 @@ No hay backend, base de datos externa ni conexión a APIs de IA. LocalStorage es
 
 ## Licencia
 MIT.
+
+## Pruebas funcionales
+Abre `tests/index.html` desde un servidor estático para ejecutar las comprobaciones de humo de los 15 generadores, campos específicos, reglas STACK, advertencias de numerical y cautelas de plugins. Estas pruebas comprueban la construcción del prompt en el navegador; no sustituyen la importación en Moodle ni la validación real de plugins/STACK.
