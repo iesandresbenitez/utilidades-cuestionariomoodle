@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFCF7">
+  <meta name="description" content="Moodle Prompt Lab: construye prompts técnicos para generar preguntas compatibles con Moodle XML.">
+  <title>Moodle Prompt Lab · STEAM 4.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#generador" aria-label="Moodle Prompt Lab, inicio">
+        <span class="brand-mark" aria-hidden="true">MP</span>
+        <span class="brand-copy"><strong>Moodle Prompt Lab</strong><small>IES Andrés Benítez · STEAM 4.0</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#generador" class="nav-link active" data-view="generator">Generador</a>
+        <a href="#plantillas" class="nav-link" data-view="templates">Mis plantillas</a>
+        <a href="#historial" class="nav-link" data-view="history">Historial</a>
+      </nav>
+      <div class="header-chip"><span class="status-dot"></span> Herramienta docente</div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="hero" id="hero">
+      <div><span class="eyebrow">LABORATORIO DE PROMPTS · MOODLE XML</span><h1>Diseña mejores preguntas.<br><em>Con instrucciones precisas.</em></h1><p>Configura el formato, define el contexto didáctico y construye un prompt técnico listo para tu IA habitual.</p></div>
+      <div class="hero-mark" aria-hidden="true"><span>15</span><small>formatos<br>de pregunta</small></div>
+    </section>
+
+    <section class="view-panel" id="view-generator" data-panel="generator">
+      <div class="section-heading"><div><span class="eyebrow">GENERADOR DE PROMPTS</span><h2>Configura tu pregunta</h2><p>Completa los bloques para construir una instrucción adaptada a Moodle.</p></div><span class="xml-pill">Salida: Moodle XML completo</span></div>
+      <form id="prompt-form" novalidate>
+        <section class="form-card" aria-labelledby="format-title"><div class="card-heading"><span class="step-number">01</span><div><h3 id="format-title">Formato de pregunta</h3><p>Selecciona el tipo de pregunta que necesitas crear.</p></div></div>
+          <div class="field-grid"><label class="field full"><span>Tipo de pregunta Moodle</span><select id="typeId" name="typeId" required></select><small id="format-description" class="help">Selecciona un formato para ver su descripción y dependencias.</small></label></div>
+          <div id="format-meta" class="format-meta" aria-live="polite"></div>
+        </section>
+        <section class="form-card" aria-labelledby="content-title"><div class="card-heading"><span class="step-number">02</span><div><h3 id="content-title">Contenido didáctico</h3><p>Describe el contexto y el aprendizaje que quieres evaluar.</p></div></div>
+          <div class="field-grid"><label class="field"><span>Asignatura / módulo</span><input id="subject" name="subject" placeholder="Ej. Tecnología e Ingeniería"></label><label class="field"><span>Nivel educativo</span><input id="level" name="level" placeholder="Ej. 1.º Bachillerato"></label><label class="field"><span>Tema o unidad didáctica</span><input id="topic" name="topic" placeholder="Ej. Circuitos eléctricos"></label><label class="field"><span>Dificultad</span><select id="difficulty" name="difficulty"><option>Baja</option><option selected>Media</option><option>Alta</option><option>Progresiva</option></select></label><label class="field"><span>Número de preguntas</span><input id="quantity" name="quantity" type="number" min="1" max="50" value="1"></label><label class="field"><span>Categoría Moodle</span><input id="category" name="category" placeholder="$course$/top/Unidad 1"></label><label class="field full"><span>Enunciado, contexto o descripción del ejercicio</span><textarea id="statement" name="statement" rows="4" placeholder="Describe qué debe resolver o demostrar el alumnado..."></textarea><small class="help">Incluye datos, restricciones, contexto profesional o situaciones de aprendizaje relevantes.</small></label></div>
+        </section>
+        <section class="form-card" aria-labelledby="config-title"><div class="card-heading"><span class="step-number">03</span><div><h3 id="config-title">Configuración específica</h3><p>Los campos y las ayudas cambian según el formato seleccionado.</p></div></div><div id="specific-fields" class="field-grid"></div></section>
+        <section class="form-card" aria-labelledby="curriculum-title"><div class="card-heading"><span class="step-number">04</span><div><h3 id="curriculum-title">Contextualización curricular</h3><p>Incorpora los elementos curriculares que quieras relacionar con la actividad.</p></div></div>
+          <label class="toggle-row"><span><strong>Activar contextualización LOMLOE Andalucía</strong><small>Activa las cautelas normativas y la relación entre preguntas y evidencias.</small></span><input id="curriculumEnabled" type="checkbox" checked><span class="toggle-ui"></span></label>
+          <div id="curriculum-fields" class="field-grid"><label class="field full"><span>Competencias específicas</span><textarea id="competencies" rows="2" placeholder="Introduce códigos y descripciones si los conoces..."></textarea><small class="help">Prioriza la información oficial facilitada por el docente; no inventes códigos.</small></label><label class="field full"><span>Criterios de evaluación</span><textarea id="criteria" rows="2" placeholder="Criterios vinculados a la actividad..."></textarea><small class="help">Indica qué desempeño observable se pretende evaluar.</small></label><label class="field full"><span>Saberes básicos</span><textarea id="knowledge" rows="2" placeholder="Saberes básicos relacionados..."></textarea><small class="help">Añade los saberes pertinentes para la etapa, curso y materia.</small></label></div>
+        </section>
+        <section class="form-card" aria-labelledby="delivery-title"><div class="card-heading"><span class="step-number">05</span><div><h3 id="delivery-title">Formato de entrega</h3><p>Define cómo debe responder la IA que reciba el prompt.</p></div></div>
+          <div class="field-grid"><label class="field"><span>Salida solicitada</span><select id="xmlOutput"><option value="complete" selected>Moodle XML completo</option><option value="explained">XML + explicación técnica</option></select><small class="help">La salida completa exige un único bloque XML desde la declaración hasta el cierre del cuestionario.</small></label><label class="field"><span>Información adicional</span><textarea id="specificText" rows="3" placeholder="Restricciones, preferencias o indicaciones adicionales..."></textarea></label></div>
+        </section>
+        <div class="form-actions"><button class="btn btn-secondary" type="reset" id="reset-form">Restablecer</button><button class="btn btn-primary" type="submit">Generar prompt <span aria-hidden="true">→</span></button></div>
+      </form>
+      <section class="result-card" id="result-panel" hidden aria-labelledby="result-title"><div class="result-heading"><div><span class="eyebrow">RESULTADO</span><h2 id="result-title">Tu prompt está preparado</h2><p>Revísalo, edítalo si lo necesitas y utilízalo en tu IA habitual.</p></div><span class="result-tag">Prompt generado</span></div><textarea id="prompt-output" rows="22" spellcheck="false" aria-label="Prompt generado"></textarea><div class="result-actions"><button class="btn btn-primary" id="copy-prompt" type="button">Copiar prompt</button><button class="btn btn-secondary" id="download-prompt" type="button">Descargar TXT</button><button class="btn btn-outline" id="save-template" type="button">Guardar como plantilla</button></div><p id="copy-status" class="inline-status" role="status" aria-live="polite"></p><p class="notice">Moodle Prompt Lab construye instrucciones. No ejecuta una IA ni valida directamente la importación en Moodle o en plugins.</p></section>
+    </section>
+
+    <section class="view-panel" id="view-templates" data-panel="templates" hidden><div class="section-heading"><div><span class="eyebrow">TU ESPACIO DE TRABAJO</span><h2>Mis plantillas</h2><p>Recupera configuraciones y prompts que hayas guardado en este navegador.</p></div></div><div id="templates-list" class="saved-list"></div></section>
+    <section class="view-panel" id="view-history" data-panel="history" hidden><div class="section-heading"><div><span class="eyebrow">ACTIVIDAD RECIENTE</span><h2>Historial</h2><p>Los últimos 30 prompts generados en este dispositivo.</p></div></div><div id="history-list" class="saved-list"></div></section>
+  </main>
+  <footer class="site-footer"><div class="footer-inner"><span>IES Andrés Benítez · Herramientas educativas</span><p>Aplicación desarrollada en el marco del Proyecto STEAM 4.0 / Programa de Cooperación Territorial Código Escuela 4.0</p></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
